@@ -1,1 +1,42 @@
 # todo
+
+services:
+  postgres: 
+    container_name: PostgresSDB
+    image: postgres:18
+    env_file: debug.env
+    networks:
+      - SBD04
+    ports:
+      - "5432:5432"
+    volumes:
+      - SDB3:/var/lib/postgresql/18/docker
+    stdin_open: true
+    tty: true
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d order -U docker"]
+      interval: 3s
+      timeout: 3s
+      retries: 5
+      start_period: 3s
+
+
+
+  orderservice:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - SBD04
+    ports:
+      - "3000:3000"
+    env_file: debug.env
+    command: ["/app/ordersystem"]
+
+
+volumes:
+  SDB3:
+
+networks:
+  SBD04:

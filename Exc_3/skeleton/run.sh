@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 docker compose up #if you wanna stop it docker compose down
 # todo
 # docker build
