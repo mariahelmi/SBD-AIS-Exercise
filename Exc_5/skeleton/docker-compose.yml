@@ -63,7 +63,7 @@ services:
     networks:
       - web
     environment:
-      - SERVER_ROOT=/public                
+      - SERVER_ROOT=/app/frontend                
       - SERVER_PORT=80 
     labels:
       - "traefik.enable=true"
@@ -74,7 +74,7 @@ services:
     volumes:
       - type: bind
         source: ./frontend
-        target: /app/fronten
+        target: /app/frontend
       
       #- sws_pg_vol:/mnt/host/c/Users/maria/documents/3rd Semester/sabd/exercise/SBD-AIS-Exercise/SBD-AIS-Exercise/Exc_5/skeleton/frontend
 
